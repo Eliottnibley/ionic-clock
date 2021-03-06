@@ -1,8 +1,8 @@
 import React from 'react';
-import { Route } from 'react-router-dom'
+import { Route, useHistory } from 'react-router-dom'
 import { IonApp, IonButton, IonContent, IonHeader, IonIcon, IonNav, IonTabBar, IonTabButton, IonTabs, IonBadge, IonLabel, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router'
-import { alarm, stopwatch, timer } from 'ionicons/icons';
+import { alarm, push, stopwatch, timer } from 'ionicons/icons';
 
 // Imports for other Components
 
@@ -29,34 +29,44 @@ import Alarms from './components/Alarms';
 import Timer from './components/Timer';
 import Stopwatch from './components/Stopwatch';
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route path='alarms' component={Alarms}></Route>
-          <Route path='timer' component={Timer}></Route>
-          <Route path='stopwatch' component={Stopwatch}></Route>
-        </IonRouterOutlet>
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="alarms">
-            <IonIcon icon={alarm} />
-            <IonLabel>Alarm</IonLabel>
-          </IonTabButton>
+const App: React.FC = (props) => {
+  return (
+    <IonApp>
+      <IonReactRouter>
+        <IonTabs>
+          <IonRouterOutlet>
+            <Route path='/alarms' component={Alarms}></Route>
+            <Route path='/timer' component={Timer}></Route>
+            <Route path='/stopwatch' component={Stopwatch}></Route>
+          </IonRouterOutlet>
+          <IonTabBar slot="bottom">
 
-          <IonTabButton tab="stopwatch">
-            <IonIcon icon={stopwatch} />
-            <IonLabel>Stopwatch</IonLabel>
-          </IonTabButton>
+            <IonTabButton
+            href='/alarms'
+            tab="alarms">
+              <IonIcon icon={alarm} />
+              <IonLabel>Alarm</IonLabel>
+            </IonTabButton>
 
-          <IonTabButton tab="timer">
-            <IonIcon icon={timer} />
-            <IonLabel>Timer</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
-    </IonReactRouter>
-  </IonApp>
-);
+            <IonTabButton 
+            href='/stopwatch'
+            tab="stopwatch">
+              <IonIcon icon={stopwatch} />
+              <IonLabel>Stopwatch</IonLabel>
+            </IonTabButton>
+
+            <IonTabButton 
+            href='/timer'
+            tab="timer">
+              <IonIcon icon={timer} />
+              <IonLabel>Timer</IonLabel>
+            </IonTabButton>
+
+          </IonTabBar>
+        </IonTabs>
+      </IonReactRouter>
+    </IonApp>
+  )
+};
 
 export default App;

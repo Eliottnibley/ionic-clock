@@ -1,10 +1,12 @@
 import React from 'react'
-import { IonContent } from '@ionic/react'
+import { IonContent, IonPage } from '@ionic/react'
 
 const Stopwatch: React.FC = () => (
-  <IonContent>
-
-  </IonContent>
+  <IonPage>
+    <IonContent>
+      this is stopwatch
+    </IonContent>
+  </IonPage>
 )
 
 export default Stopwatch
