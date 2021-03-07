@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { IonCol, IonContent, IonGrid, IonPage, IonRow, IonLabel, IonButton } from '@ionic/react'
+import { IonCol, IonContent, IonGrid, IonPage, IonRow, IonLabel, IonButton, IonList, IonItem, IonItemDivider, IonNote } from '@ionic/react'
 
 const Stopwatch: React.FC = () => {
   const [tenths, setTenths] = useState<number>(0)
@@ -8,16 +8,67 @@ const Stopwatch: React.FC = () => {
   const [time, setTime] = useState<number>(0)
   const [timeRunning, setTimeRunning] = useState<boolean>(false)
   const [laps, setLaps] = useState<number[]>([])
-  const [lapTime, setLapTime] = useState<number>(0)
+  const [minLap, setMinLap] = useState<number>(0)
+  const [maxlap, setMaxLap] = useState<number>(0)
 
   const formatTime = (minutes: number, seconds: number, tenths: number) => {
     return `${minutes / 10 < 1 ? '0' + minutes : minutes}:${seconds / 10 < 1 ? '0' + seconds : seconds}.${tenths / 10 < 1 ? '0' + tenths : tenths}`
   }
 
+  const formatLapTime = (miliSec: number) => {
+    const min = Math.floor(miliSec / (60 * 1000))
+    miliSec = miliSec % (60 * 1000)
+    const sec = Math.floor(miliSec / 1000)
+    miliSec = miliSec % 1000
+    const tenth = Math.floor(miliSec / 10)
+
+    return `${min / 10 < 1 ? '0' + min : min}:${sec / 10 < 1 ? '0' + sec : sec}.${tenth / 10 < 1 ? '0' + tenth : tenth}`
+  }
+
+  const calculateLap = () => {
+    return laps.reduce((acc, cur) => acc + cur, 0)
+  }
+
+  const findMin = () => {
+    let len = laps.length, min = laps[0], index = 0
+    while(len--) {
+      if(laps[len] < min) {
+        min = laps[len]
+        index = len
+      }
+    }
+    return index
+  }
+
+  const findMax = () => {
+    let len = laps.length, max = laps[0], index = 0
+    while(len--) {
+      if(laps[len] > max) {
+        max = laps[len]
+        index = len
+      }
+    }
+    return index
+  }
+
+  const lapsMap = laps.map((elem, ind) => {
+    let color
+    if (laps.length >= 2) {
+      color = ind == maxlap ? 'danger' : ind == minLap ? 'success' : 'dark'
+    }
+    else {
+      color = 'dark'
+    }
+    return (
+      <IonItem lines='full' key={ind + 1}>
+        <IonLabel color={color} slot='start'>{`Lap ${ind + 1}`}</IonLabel>
+        <IonNote color={color} slot='end'>{formatLapTime(elem)}</IonNote>
+      </IonItem>
+  )})
+
   if (timeRunning) {
     setTimeout(() => {
       setTime(time + 10);
-      setLapTime(lapTime + 10)
   
       let formated = time
       setMinutes(Math.floor(formated / (60 * 1000)))
@@ -41,18 +92,19 @@ const Stopwatch: React.FC = () => {
             <IonCol size='4'>
               <IonButton 
               onClick={() => {
-                console.log(laps)
                 if (timeRunning) {
                   if (laps.length == 0) {
-                    let newLaps = [lapTime]
+                    const newLaps = laps
+                    newLaps.push(time)
                     setLaps(newLaps)
-                    setLapTime(0)
                   }
                   else {
                     let newLaps = laps
-                    newLaps[laps.length] = lapTime
+                    newLaps.push(time - calculateLap())
                     setLaps(newLaps)
-                    setLapTime(0)
+                    setMinLap(findMin())
+                    setMaxLap(findMax())
+                    
                   }
                 }
                 else {
@@ -60,7 +112,6 @@ const Stopwatch: React.FC = () => {
                   setMinutes(0)
                   setSeconds(0)
                   setTenths(0)
-                  setLapTime(0)
                   setLaps([])
                 }
               }}
@@ -80,7 +131,14 @@ const Stopwatch: React.FC = () => {
         </IonGrid>
       </IonContent>
       <IonContent>
-
+      <IonList>
+          {!timeRunning && time <= 0 ? '' :
+          (<IonItem lines='full'>
+            <IonLabel slot='start'>{`Lap ${laps.length + 1}`}</IonLabel>
+            <IonNote slot='end'>{formatLapTime(time - calculateLap())}</IonNote>
+          </IonItem>)}
+          {lapsMap.reverse()}
+        </IonList>
       </IonContent>
     </IonPage>
   )
