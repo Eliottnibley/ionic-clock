@@ -4,7 +4,7 @@ import { IonContent, IonPage } from '@ionic/react'
 const Alarms: React.FC = () => (
   <IonPage>
     <IonContent>
-      this is alarm
+    this is alarm
     </IonContent> 
   </IonPage>
 )

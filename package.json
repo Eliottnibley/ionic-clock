@@ -4,6 +4,9 @@
   "private": true,
   "dependencies": {
     "@capacitor/core": "2.4.7",
+    "@ionic-native/media": "^5.31.1",
+    "@ionic-native/native-audio": "^5.31.1",
+    "@ionic-native/wheel-selector": "^5.31.1",
     "@ionic/react": "^5.5.0",
     "@ionic/react-router": "^5.5.0",
     "@testing-library/jest-dom": "^5.11.9",
@@ -17,6 +20,7 @@
     "@types/react-router-dom": "^5.1.7",
     "ionicons": "^5.4.0",
     "react": "^17.0.1",
+    "react-circular-progressbar": "^2.0.3",
     "react-dom": "^17.0.1",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",

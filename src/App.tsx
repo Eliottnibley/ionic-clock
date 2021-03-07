@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, useHistory } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 import { IonApp, IonButton, IonContent, IonHeader, IonIcon, IonNav, IonTabBar, IonTabButton, IonTabs, IonBadge, IonLabel, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router'
 import { alarm, push, stopwatch, timer } from 'ionicons/icons';
@@ -35,7 +35,7 @@ const App: React.FC = (props) => {
       <IonReactRouter>
         <IonTabs>
           <IonRouterOutlet>
-            <Route path='/alarms' component={Alarms}></Route>
+            <Route exact path='/alarms' component={Alarms}></Route>
             <Route path='/timer' component={Timer}></Route>
             <Route path='/stopwatch' component={Stopwatch}></Route>
           </IonRouterOutlet>
