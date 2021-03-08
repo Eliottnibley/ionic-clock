@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IonCol, IonContent, IonGrid, IonPage, IonRow, IonLabel, IonButton, IonList, IonItem, IonItemDivider, IonNote } from '@ionic/react'
 
 const Stopwatch: React.FC = () => {
@@ -72,7 +72,7 @@ const Stopwatch: React.FC = () => {
       setTime(time + 10);
       
   
-      let formated = time
+      let formated = time + 10
       setMinutes(Math.floor(formated / (60 * 1000)))
       formated = formated % (60 * 1000)
       setSeconds(Math.floor(formated / 1000))
