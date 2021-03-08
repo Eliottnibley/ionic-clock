@@ -11,6 +11,7 @@ const Landing: React.FC = () => {
         <IonText color='' style={{'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center', 'textAlign':'center'}}>The app features custom alarms, convinient stopwatch, and easy an easy to use timer. Use the tabs at the bottom to explore!</IonText>
       </IonContent>
       <IonContent style={{'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center'}}>
+        <IonTitle>For the best expirience, view page in mobile device view.</IonTitle>
       </IonContent>
     </IonPage>
   )
