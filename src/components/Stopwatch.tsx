@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { IonCol, IonContent, IonGrid, IonPage, IonRow, IonLabel, IonButton, IonList, IonItem, IonItemDivider, IonNote } from '@ionic/react'
 
 const Stopwatch: React.FC = () => {
+
   const [tenths, setTenths] = useState<number>(0)
   const [minutes, setMinutes] = useState<number>(0)
   const [seconds, setSeconds] = useState<number>(0)
@@ -61,14 +62,15 @@ const Stopwatch: React.FC = () => {
     }
     return (
       <IonItem lines='full' key={ind + 1}>
-        <IonLabel color={color} slot='start'>{`Lap ${ind + 1}`}</IonLabel>
-        <IonNote color={color} slot='end'>{formatLapTime(elem)}</IonNote>
+        <IonLabel style={{'fontSize': '2vh'}} color={color} slot='start'>{`Lap ${ind + 1}`}</IonLabel>
+        <IonNote style={{'fontSize': '2vh'}} color={color} slot='end'>{formatLapTime(elem)}</IonNote>
       </IonItem>
   )})
 
   if (timeRunning) {
     setTimeout(() => {
       setTime(time + 10);
+      
   
       let formated = time
       setMinutes(Math.floor(formated / (60 * 1000)))
@@ -134,8 +136,8 @@ const Stopwatch: React.FC = () => {
       <IonList>
           {!timeRunning && time <= 0 ? '' :
           (<IonItem lines='full'>
-            <IonLabel slot='start'>{`Lap ${laps.length + 1}`}</IonLabel>
-            <IonNote slot='end'>{formatLapTime(time - calculateLap())}</IonNote>
+            <IonLabel style={{'fontSize': '2vh'}} slot='start'>{`Lap ${laps.length + 1}`}</IonLabel>
+            <IonNote style={{'fontSize': '2vh'}} slot='end'>{formatLapTime(time - calculateLap())}</IonNote>
           </IonItem>)}
           {lapsMap.reverse()}
         </IonList>

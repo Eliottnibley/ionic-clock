@@ -103,7 +103,7 @@ const Timer: React.FC = () => {
         <IonRow>
           <IonCol>
             <IonButton
-            color={timerExists ? 'danger' : 'primary'}
+            color={timerExists ? 'warning' : 'primary'}
             disabled={timerRunning}
             size='large' 
             expand='block' 
@@ -120,7 +120,7 @@ const Timer: React.FC = () => {
           </IonCol>
           <IonCol>
             <IonButton 
-            color={timerExists && timerRunning ? 'primary' : timerExists ? 'success' : 'primary'}
+            color={timerExists && timerRunning ? 'primary' : timerExists ? 'secondary' : 'primary'}
             size='large' 
             expand='block'
             onClick={e => {
