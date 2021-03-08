@@ -28,6 +28,7 @@ import './theme/variables.css';
 import Alarms from './components/Alarms';
 import Timer from './components/Timer';
 import Stopwatch from './components/Stopwatch';
+import Landing from './components/Landing'
 
 const App: React.FC = (props) => {
   return (
@@ -35,7 +36,8 @@ const App: React.FC = (props) => {
       <IonReactRouter>
         <IonTabs>
           <IonRouterOutlet>
-            <Route exact path='/alarms' component={Alarms}></Route>
+            <Route exact path='/' component={Landing}></Route>
+            <Route path='/alarms' component={Alarms}></Route>
             <Route path='/timer' component={Timer}></Route>
             <Route path='/stopwatch' component={Stopwatch}></Route>
           </IonRouterOutlet>
